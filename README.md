@@ -1,5 +1,6 @@
 #  2025-06-05 - Sprint 0
 Aufsetzen des Projektes nach Script
+Auf Schritt 4 stecken geblieben, da ich auf Azure nicht genug Berechtigung habe um static web app zu erstellen.
 
 
 
