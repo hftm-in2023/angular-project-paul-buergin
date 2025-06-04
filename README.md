@@ -1,3 +1,9 @@
+#  2025-06-05 - Sprint 0
+Aufsetzen des Projektes nach Script
+
+
+
+
 # AngularBlog
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
