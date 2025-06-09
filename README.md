@@ -1,5 +1,11 @@
-# 2025-06-08 test
+# 2025-06-09
 
+Mein Azure Account sieht das hftm repo nicht.
+Ich kann nur ein repo von einem eigenen Github Account auswählen.
+Ich benutze  PBuergin / angular-project-paul-buergin als Hauptrepo,
+und benutze  hftm-in2023 / angular-project-paul-buergin als Zweitrepo zur Dokumentation.
+
+Damit der Build funktioniert, musste ich Node auf Version 18.20.8 und Angular auf Version 17 zurücksetzen.
 
 
 #  2025-06-05 - Sprint 0
