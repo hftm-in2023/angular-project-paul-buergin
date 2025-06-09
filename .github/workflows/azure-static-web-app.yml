@@ -4,22 +4,34 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
 jobs:
   build_and_deploy:
-    if: github.repository == 'PBuergin/angular-project-paul-buergin'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Set Node version
-        run: echo "ORYX_NODE_VERSION=20.19.0" >> $GITHUB_ENV
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.0
 
-      - name: Build and Deploy
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular app
+        run: npm run build
+
+      - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{secrets.AZURE_STATIC_WEB_APPS_API_TOKEN}}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          app_location: "/" # oder z. B. "angular-blog"
-          output_location: "dist/angular-blog"
+          action: upload
+          app_location: dist/angular-blog
+          skip_app_build: true
