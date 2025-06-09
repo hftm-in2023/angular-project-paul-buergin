@@ -30,4 +30,4 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"
-          output_location: "dist/angular-project-paul-buergin"
+          output_location: "dist/angular-blog"
