@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "ng-update": "ng update"
   },
   "private": true,
   "dependencies": {
@@ -31,7 +32,14 @@
     "@angular/cli": "17.3.12",
     "@angular/compiler-cli": "17.3.12",
     "@types/jasmine": "^5.1.8",
+    "angular-eslint": "20.0.0",
+    "eslint": "^9.28.0",
     "husky": "^9.1.7",
-    "typescript": "^5.4.5"
+    "lint-staged": "^15.5.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "8.33.1"
+  },
+  "lint-staged": {
+    "*.{ts,html,scss}": "eslint --fix"
   }
 }
