@@ -80,7 +80,8 @@
               "browserTarget": "angular-blog:build:production"
             },
             "development": {
-              "browserTarget": "angular-blog:build:development"
+              "browserTarget": "angular-blog:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
