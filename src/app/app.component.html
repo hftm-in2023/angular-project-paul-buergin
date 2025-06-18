@@ -1,15 +1,14 @@
-<h1>{{ title }}</h1>
+<header>
+  <h1>Mein Angular Blog</h1>
+  <nav>
+    <a routerLink="/">Alle Blogs</a>
+  </nav>
+</header>
 
-<div class="blog-container">
-  @if (blogEntries.length > 0) { @for (entry of blogEntries; track entry.id) {
-      <div class="blog-card">
-        <h2>{{ entry.title }}</h2>
-        <p>Von: {{ entry.author }}</p>
-        <p>Veröffentlicht am: {{ entry.publishDate | date:'shortDate' }}</p>
-        <button>Details ansehen</button>
-      </div>
-    }
-  } @else {
-    <p>Lade Blog-Einträge oder keine Einträge gefunden.</p>
-  }
-</div>
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>&copy; {{ currentYear }} Mein Angular Blog</p>
+</footer>

@@ -1,8 +1,10 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
+import { BlogListComponent } from './blog-list/blog-list.component'; // <<< NEUE Komponente importieren
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 export const routes: Routes = [
-  // Hier können Sie später Ihre Routen definieren
-  // Beispiel: { path: '', component: HomeComponent },
-  // { path: 'details/:id', component: BlogDetailsComponent }
+  { path: '', component: BlogListComponent, title: 'Blog-Übersicht' }, // Home-Route zur BlogListComponent
+  { path: 'detail/:id', component: BlogDetailComponent, title: 'Blog-Details' },
+  { path: '**', redirectTo: '' } // Fallback für unbekannte Routen
 ];
