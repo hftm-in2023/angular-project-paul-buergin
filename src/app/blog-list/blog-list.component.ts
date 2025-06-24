@@ -13,7 +13,7 @@ interface BlogEntry {
   id: number; // <--- WICHTIG: Hier auf 'number' ändern!
   title: string;
   author: string;
-  publishDate: string;
+  createdAt: string;
   // Fügen Sie hier weitere Felder hinzu, die in der Listenansicht benötigt werden
   // wie z.B. eine kurze Zusammenfassung (falls vorhanden)
 }
