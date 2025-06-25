@@ -1,20 +1,20 @@
 // src/app/blog-detail/blog-detail.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http'; // <<< DIESEN IMPORT ENTFERNEN!
 import { CommonModule } from '@angular/common';
 
-// RxJS Imports
-import { Observable, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+// RxJS Imports (of und switchMap werden hier nicht mehr direkt benötigt, da der Resolver es macht)
+// import { Observable, of } from 'rxjs';
+// import { catchError, switchMap } from 'rxjs/operators';
 
 // Angepasstes BlogEntry-Interface (wie wir es zuletzt definiert haben)
 interface BlogEntry {
-  id: number; // <--- HIER MUSS ES 'number' SEIN!
+  id: number;
   title: string;
   author: string;
   publishDate: string;
-  content: string; // <--- Sicherstellen, dass dieses Feld vorhanden ist
+  content: string;
   comments: any[];
   createdAt: string;
   createdByMe: boolean;
@@ -28,62 +28,42 @@ interface BlogEntry {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.scss'] // Stil-Datei für diese Komponente
+  styleUrls: ['./blog-detail.component.scss']
 })
 export class BlogDetailComponent implements OnInit {
   blogEntry: BlogEntry | undefined;
-  isLoading = true;
+  // isLoading sollte hier direkt auf false gesetzt werden, da Resolver die Daten vorher lädt
+  isLoading = false; // <<< WICHTIG: Standardwert ist jetzt false
   errorMessage: string | undefined;
 
-  private apiUrl = '/api/entries';
-
+  // HttpClient wird hier nicht mehr benötigt, da der Resolver ihn nutzt
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    // private http: HttpClient, // <<< DIESEN PARAMETER ENTFERNEN!
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      switchMap(params => {
-        this.isLoading = true;
-        this.errorMessage = undefined;
-        const id = params.get('id'); // ID kommt als String aus der URL
-        if (id) {
-          console.log(`📡 Lade Blog-Details für ID: ${id}`);
-          // Konvertiere die String-ID in eine Zahl für die Backend-Anfrage
-          const numericId = parseInt(id, 10);
-          if (isNaN(numericId)) {
-            console.error('❌ Ungültige ID im URL-Parameter:', id);
-            this.errorMessage = 'Ungültige Blog-ID.';
-            this.isLoading = false;
-            return of(undefined);
-          }
+    // Hier abonnieren Sie die 'data' Observable, das die vom Resolver geladenen Daten enthält.
+    this.route.data.subscribe(data => {
+      // 'blogEntry' ist der Schlüssel, den Sie im resolve-Block in app.routes.ts vergeben haben
+      this.blogEntry = data['blogEntry'];
 
-          // Jetzt direkt ein BlogEntry-Objekt erwarten (kein .data-Feld im Backend!)
-          return this.http.get<BlogEntry>(`${this.apiUrl}/${numericId}`).pipe(
-            catchError(error => {
-              console.error('❌ Fehler beim Laden der Blog-Details:', error);
-              this.errorMessage = 'Fehler beim Laden der Details. Bitte versuchen Sie es später erneut.';
-              this.isLoading = false;
-              return of(undefined); // Gibt 'undefined' zurück, um den Fehlerfluss zu beenden
-            })
-          );
-        } else {
-          this.errorMessage = 'Keine Blog-ID in der URL gefunden.';
-          this.isLoading = false;
-          return of(undefined);
-        }
-      })
-    ).subscribe(entry => {
-      this.blogEntry = entry;
-      this.isLoading = false;
       if (!this.blogEntry) {
-        this.errorMessage = this.errorMessage || 'Blog-Eintrag nicht gefunden.';
+        // Dies wird ausgeführt, wenn der Resolver null oder undefined zurückgegeben hat (z.B. bei Fehler oder 404)
+        this.errorMessage = 'Blog-Eintrag konnte nicht geladen oder gefunden werden.';
+        // Optional: Hier könnten Sie auch automatisch zurück zur Liste navigieren,
+        // aber der Resolver tut das im Fehlerfall bereits, bevor die Komponente geladen wird.
+        // Wenn Sie möchten, dass diese Komponente die Fehlermeldung anzeigt, stellen Sie sicher,
+        // dass der Resolver im Fehlerfall NICHT navigiert, sondern nur 'of(null)' zurückgibt.
       } else {
-        console.log('✅ Blog-Details geladen:', this.blogEntry);
+        console.log('✅ Blog-Details vom Resolver geladen:', this.blogEntry);
       }
+      this.isLoading = false; // Laden ist beendet, da Resolver seine Arbeit getan hat
     });
+
+    // <<< DEN GESAMTEN ALTEN HTTP-REQUEST-CODE HIER ENTFERNEN! >>>
+    // Denken Sie an den gesamten 'this.route.paramMap.pipe(...).subscribe(...)' Block.
   }
 
   goToAllBlogs(): void {
