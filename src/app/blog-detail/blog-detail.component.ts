@@ -1,12 +1,11 @@
 // src/app/blog-detail/blog-detail.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { HttpClient } from '@angular/common/http'; // <<< DIESEN IMPORT ENTFERNEN!
 import { CommonModule } from '@angular/common';
 
 // RxJS Imports (of und switchMap werden hier nicht mehr direkt benötigt, da der Resolver es macht)
-// import { Observable, of } from 'rxjs';
-// import { catchError, switchMap } from 'rxjs/operators';
+// import { Observable, of } from 'rxjs'; // DIESE IMPORTE SIND NICHT MEHR NÖTIG
+// import { catchError, switchMap } from 'rxjs/operators'; // DIESE IMPORTE SIND NICHT MEHR NÖTIG
 
 // Angepasstes BlogEntry-Interface (wie wir es zuletzt definiert haben)
 interface BlogEntry {
@@ -32,8 +31,7 @@ interface BlogEntry {
 })
 export class BlogDetailComponent implements OnInit {
   blogEntry: BlogEntry | undefined;
-  // isLoading sollte hier direkt auf false gesetzt werden, da Resolver die Daten vorher lädt
-  isLoading = false; // <<< WICHTIG: Standardwert ist jetzt false
+  isLoading = false; // Standardwert ist jetzt false, da Resolver Daten vorher lädt
   errorMessage: string | undefined;
 
   // HttpClient wird hier nicht mehr benötigt, da der Resolver ihn nutzt
@@ -50,12 +48,7 @@ export class BlogDetailComponent implements OnInit {
       this.blogEntry = data['blogEntry'];
 
       if (!this.blogEntry) {
-        // Dies wird ausgeführt, wenn der Resolver null oder undefined zurückgegeben hat (z.B. bei Fehler oder 404)
         this.errorMessage = 'Blog-Eintrag konnte nicht geladen oder gefunden werden.';
-        // Optional: Hier könnten Sie auch automatisch zurück zur Liste navigieren,
-        // aber der Resolver tut das im Fehlerfall bereits, bevor die Komponente geladen wird.
-        // Wenn Sie möchten, dass diese Komponente die Fehlermeldung anzeigt, stellen Sie sicher,
-        // dass der Resolver im Fehlerfall NICHT navigiert, sondern nur 'of(null)' zurückgibt.
       } else {
         console.log('✅ Blog-Details vom Resolver geladen:', this.blogEntry);
       }
