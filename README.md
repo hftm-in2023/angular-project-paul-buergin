@@ -1,3 +1,12 @@
+# 2025-06-26
+# Sprint 2
+## neue Features:
+- Lazy Loading  
+- Angular Resolver  
+- Global Error Handler
+
+
+
 # 2025-06-18
 # Angular Blog Projekt
 ## Überblick

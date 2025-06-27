@@ -6,7 +6,8 @@
       <div class="blog-card">
         <h2>{{ entry.title }}</h2>
         <p>Von: {{ entry.author }}</p>
-        <p>Veröffentlicht am: {{ entry.publishDate | date:'shortDate' }}</p>
+        <p>Erstellt am: {{ entry.createdAt | date:'shortDate' }}</p>
+        <p>Blog-ID: {{entry.id}}</p>
         <button [routerLink]="['/detail', entry.id]">Details ansehen</button>
       </div>
     }
