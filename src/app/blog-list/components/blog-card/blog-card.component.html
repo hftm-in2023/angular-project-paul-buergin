@@ -1,0 +1,9 @@
+<div class="blog-card">
+  <div>
+    <h2>{{ blog.title }}</h2>
+    <p>Von: {{ blog.author }}</p>
+    <p>Erstellt am: {{ blog.createdAt | date:'shortDate' }}</p>
+    <p>Blog-ID: {{ blog.id }}</p>
+  </div>
+  <button (click)="onViewDetails()">Details ansehen</button>
+</div>

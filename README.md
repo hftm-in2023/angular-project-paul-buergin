@@ -1,3 +1,24 @@
+# 2025-08-07
+# Sprint 2a
+## Schritt 1: Detailseite eines Blogs
+Wurde in Sprint 2 schon erledigt
+## Schritt 2: Navigation zur Übersicht
+Wurde in Sprint 2 schon erledigt
+## Schritt 3: Smart/Dumb Pattern
+Die blog-detail.component (html, scss, ts) wurden ersetzt durch eine smart/dumb Ordnerstruktur.
+Die neuen Files lauten:
+blog-display.component (html, scss, ts)
+und
+blog-detail.container (html, scss, ts)
+ 
+Das Selbe mit den blog-list.component (html, scss, ts)
+Diese wurden ersetzt durch:
+blog-card.component (html, scss, ts)
+und
+blog-list.container (html, scss, ts)
+
+
+
 # 2025-06-26
 # Sprint 2
 ## neue Features:

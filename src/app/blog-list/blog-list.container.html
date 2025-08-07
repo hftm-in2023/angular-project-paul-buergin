@@ -1,0 +1,20 @@
+<h1>{{ title }}</h1>
+
+@if (state$ | async; as state) {
+  <div class="blog-container">
+    @if (state.isLoading) {
+      <p>Lade Blog-Einträge...</p>
+    } @else if (state.errorMessage) {
+      <p class="error-message">{{ state.errorMessage }}</p>
+    } @else if (state.blogs.length > 0) {
+      @for (blog of state.blogs; track blog.id) {
+        <app-blog-card 
+          [blog]="blog" 
+          (viewDetails)="navigateToDetail($event)">
+        </app-blog-card>
+      }
+    } @else {
+      <p>Keine Blog-Einträge gefunden.</p>
+    }
+  </div>
+}

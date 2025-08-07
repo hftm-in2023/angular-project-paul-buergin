@@ -1,0 +1,12 @@
+<!-- 
+  Der Container verbindet den Zustand (state$) mit der Dumb-Komponente.
+  Die AsyncPipe (@async) abonniert das Observable automatisch.
+-->
+@if (state$ | async; as state) {
+  <app-blog-display
+    [isLoading]="state.isLoading"
+    [errorMessage]="state.errorMessage"
+    [blog]="state.blog"
+    (navigateBack)="goBack()">
+  </app-blog-display>
+}

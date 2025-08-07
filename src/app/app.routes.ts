@@ -9,12 +9,12 @@ export const routes: Routes = [
   { path: '', redirectTo: 'blog-list', pathMatch: 'full' },
   {
     path: 'blog-list',
-    loadComponent: () => import('./blog-list/blog-list.component').then(c => c.BlogListComponent)
+    loadComponent: () => import('./blog-list/blog-list.container').then(c => c.BlogListContainer)
   },
   {
     path: 'detail/:id',
     // lazy loading der Komponente bleibt
-    loadComponent: () => import('./blog-detail/blog-detail.component').then(c => c.BlogDetailComponent),
+    loadComponent: () => import('./blog-detail/blog-detail.container').then(c => c.BlogDetailContainer),
     // HIER ist der ENTSCHEIDENDE TEIL für den Resolver!
     resolve: {
       blogEntry: blogEntryResolver // <--- Dieser Eintrag muss hier sein!

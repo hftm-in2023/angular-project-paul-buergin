@@ -1,0 +1,22 @@
+<div class="blog-detail-container">
+  @if (isLoading) {
+    <p>Lade Details...</p>
+  } @else if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+    <button (click)="onNavigateBack()">Alle Blogs</button>
+  } @else if (blog) {
+    <div class="blog-detail-card">
+      <h1>{{ blog.title }}</h1>
+      <p class="meta-info">Von: {{ blog.author }} | Veröffentlicht am: {{ blog.publishDate | date:'mediumDate' }}</p>
+      <div class="blog-content">
+        <p>{{ blog.content }}</p>
+      </div>
+      <p>Likes: {{ blog.likes }}</p>
+      <p>Erstellt am: {{ blog.createdAt | date:'short' }}</p>
+    </div>
+    <button (click)="onNavigateBack()">Alle Blogs</button>
+  } @else {
+    <p>Details konnten nicht geladen werden.</p>
+    <button (click)="onNavigateBack()">Alle Blogs</button>
+  }
+</div>
