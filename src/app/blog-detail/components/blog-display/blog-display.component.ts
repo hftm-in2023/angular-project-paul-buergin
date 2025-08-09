@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Blog } from '../../../shared/models/blog.model'; // Annahme: Model-Datei existiert
+import { Blog } from '../../../shared/models/blog.schema'; // Annahme: schema-Datei existiert
 
 @Component({
   selector: 'app-blog-display',

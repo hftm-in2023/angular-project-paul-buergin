@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Blog } from '../../shared/models/blog.model';
-import { BackendResponse } from '../../shared/models/backend-response.model';
+import { Blog } from '../../shared/models/blog.schema';
+import { BackendResponse } from '../../shared/models/backend-response.schema';
 
 // @Injectable macht diesen Service in der ganzen App verfügbar (Dependency Injection)
 @Injectable({

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, startWith, catchError, of } from 'rxjs';
-import { Blog } from '../shared/models/blog.model';
+import { Blog } from '../shared/models/blog.schema';
 import { BlogDisplayComponent } from './components/blog-display/blog-display.component';
 
 // Definiert die Form des Zustands-Objekts

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Blog } from '../../../shared/models/blog.model';
+import { Blog } from '../../../shared/models/blog.schema';
 
 @Component({
   selector: 'app-blog-card',

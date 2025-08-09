@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable, map, startWith, catchError, of } from 'rxjs';
-import { Blog } from '../shared/models/blog.model';
+import { Blog } from '../shared/models/blog.schema';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { BlogService } from '../core/services/blog.service'; // Annahme: Du erstellst einen BlogService
 
