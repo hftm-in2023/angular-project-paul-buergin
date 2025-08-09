@@ -1,6 +1,8 @@
 # 2025-08-09
+Nach mehreren Tagen rumbasteln durch angular update v18 -> v20 projekt zerschossen.  
+Schlussendlich älterer commit zum head gemacht, und unter v20 zum laufen gebracht.  
+Stand: Sprint 2a, Teil 3 erledigt.
 
-älterer commit aus Testprojekt zum Head machen
 
 # 2025-08-07
 # Sprint 2a
