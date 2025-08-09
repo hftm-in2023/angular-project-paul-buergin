@@ -1,3 +1,6 @@
+im branch feature/zod_dev weitermachen  
+
+
 # 2025-08-09
 Nach mehreren Tagen rumbasteln durch angular update v18 -> v20 projekt zerschossen.  
 Schlussendlich älterer commit zum head gemacht, und unter v20 zum laufen gebracht.  
