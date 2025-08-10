@@ -1,4 +1,21 @@
 # 2025-08-10
+## Schritt 5: Interceptor
+Ich habe einen Logging-Interceptor erstellt, welcher den HTTP Traffic in der Browser Konsole dokumentiert.  
+## Zusammenfassung von gemini:  
+Implementierung eines HTTP-InterceptorsGemäss der Aufgabenstellung wurde ein HTTP-Interceptor implementiert, um alle ausgehenden Netzwerkanfragen und die dazugehörigen Antworten zentral zu verwalten. Ein Interceptor agiert wie eine "Middleware" oder ein "Kontrollpunkt", den jede HttpClient-Anfrage durchlaufen muss.Anwendungsfall: Logging-InterceptorFür dieses Projekt wurde ein Logging-Interceptor als funktionaler Interceptor (HttpInterceptorFn) umgesetzt. Seine Hauptaufgaben sind:Protokollierung von Anfragen: Sobald eine HTTP-Anfrage die Anwendung verlässt, wird eine Konsolennachricht mit der Methode (z.B. GET) und der Ziel-URL ausgegeben.Protokollierung von Antworten: Nach Erhalt der Antwort vom Server wird eine weitere Konsolennachricht ausgegeben, die den Status-Code (z.B. 200 OK) und die Dauer der Anfrage in Millisekunden enthält.Fehlerprotokollierung: Schlägt eine Anfrage fehl, wird dies ebenfalls mit einer detaillierten Fehlermeldung in der Konsole protokolliert.Dieses Vorgehen ist extrem nützlich für die Fehlersuche, da der gesamte Netzwerkverkehr der Anwendung an einer zentralen Stelle transparent nachverfolgt werden kann.Registrierung in der AnwendungDer funktionale Interceptor wurde in der zentralen Konfigurationsdatei src/app/app.config.ts registriert. Dies geschah mithilfe der provideHttpClient-Funktion und dem withInterceptors-Feature, das in modernen Angular-Versionen zur Verfügung steht:// in app.config.ts
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loggingInterceptor } from './core/interceptors/logging.interceptor';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(
+      withInterceptors([loggingInterceptor])
+    ),
+    // ... andere Provider
+  ]
+};
+Durch diese zentrale Registrierung wird sichergestellt, dass jede HttpClient-Anfrage in der gesamten Anwendung automatisch und ohne weitere Konfiguration durch den Logging-Interceptor geleitet wird.  
+
 ## Schritt 4: Validierung mit zod
 Funktioniert, habe blog.schema.ts so konfiguriert, dass alle Blogs, bei denen der Author keine email Adresse ist, herausgefiltert werden.    
 ## Zusammenfassung von gemini:  
