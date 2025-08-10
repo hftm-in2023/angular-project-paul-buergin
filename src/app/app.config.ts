@@ -1,14 +1,26 @@
-// src/app/app.config.ts (oder der Ort, wo Ihre App-Konfiguration ist)
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router'; // <<< Dieser Import MUSS da sein
+import { ApplicationConfig, ErrorHandler } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-import { routes } from './app.routes'; // <<< Ihre definierten Routen
-import { provideHttpClient } from '@angular/common/http'; // Auch das sollte hier sein
+// 1. Die korrekten Funktionen für HttpClient und Interceptoren importieren
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+
+import { routes } from './app.routes';
+import { GlobalErrorHandler } from './core/global-error-handler';
+// 2. Deinen funktionalen Interceptor importieren
+import { loggingInterceptor } from './core/interceptors/logging.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), // <<< Hier wird der Router bereitgestellt
-    provideHttpClient() // Wichtig für HTTP-Anfragen
-    // ... andere Provider, z.B. provideAnimations() für Angular Material
+    // Stellt die Routen für die Anwendung bereit
+    provideRouter(routes),
+
+    // Stellt den HttpClient bereit und registriert den funktionalen Interceptor.
+    // Jede HTTP-Anfrage wird jetzt automatisch durch den loggingInterceptor geleitet.
+    provideHttpClient(
+      withInterceptors([loggingInterceptor])
+    ),
+
+    // Registriert deinen globalen Error-Handler
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ]
 };

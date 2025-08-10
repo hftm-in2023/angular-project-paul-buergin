@@ -1,18 +1,7 @@
-// src/main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { provideRouter } from '@angular/router';
-import { routes } from './app/app.routes';
-import { ErrorHandler } from '@angular/core'; // <<< Import ErrorHandler
-import { GlobalErrorHandler } from './app/core/global-error-handler'; // <<< Importieren Sie Ihren ErrorHandler
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideHttpClient(),
-    provideRouter(routes),
-    // <<< HIER IHREN GLOBALEN ERROR HANDLER REGISTRIEREN >>>
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }
-  ]
-})
+// Startet die AppComponent und übergibt die gesamte Konfiguration aus app.config.ts
+bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
