@@ -1,4 +1,14 @@
+# 2025-08-10
+## Schritt 4: Validierung mit zod
+Funktioniert, habe blog.schema.ts so konfiguriert, dass alle Blogs, bei denen der Author keine email Adresse ist, herausgefiltert werden.    
+## Zusammenfassung von gemini:  
+Datenvalidierung mit ZodUm die Anwendung robuster gegen unerwartete oder fehlerhafte Daten vom Backend zu machen, wurde die Bibliothek Zod für die Laufzeit-Validierung implementiert. Eine TypeScript-interface allein bietet nur Sicherheit zur Entwicklungszeit; Zod stellt sicher, dass die echten API-Daten zur Laufzeit der erwarteten Struktur entsprechen.Implementierungs-AnsatzSchema-Definition: Für die Datenmodelle (Blog, BackendResponse) wurden Zod-Schemas in *.schema.ts-Dateien erstellt. Diese definieren die erwarteten Datentypen und Validierungsregeln (z.B. .string(), .number(), .email(), .optional()).Typ-Ableitung: Der TypeScript-Typ wurde direkt vom Schema abgeleitet (z.infer<typeof ...>), um eine einzige Quelle der Wahrheit für Datenstruktur und Validierung zu schaffen und redundante interface-Definitionen zu vermeiden.Integration im Service: Die Validierung wurde im BlogService direkt nach dem Empfang der HTTP-Antwort integriert.Wichtige Erkenntnis: Robuste Filterung statt "Alles oder Nichts"Anfänglich wurde die strenge .parse()-Methode von Zod verwendet. Dies führte dazu, dass bei einem einzigen fehlerhaften Datensatz in der Liste die gesamte Anfrage fehlschlug und keine Blogs angezeigt wurden.Um die User Experience zu verbessern, wurde die Logik auf die flexiblere .safeParse()-Methode umgestellt:Der BlogService validiert jetzt jeden Blog-Eintrag einzeln in einer Schleife.Gültige Einträge werden gesammelt und an die Benutzeroberfläche weitergegeben.Ungültige Einträge werden herausgefiltert und mit einer detaillierten Fehlermeldung in der Entwicklerkonsole protokolliert.Dieser Ansatz stellt sicher, dass die Anwendung auch bei teilweise fehlerhaften Daten vom Backend funktionsfähig bleibt und dem Benutzer alle korrekten Informationen anzeigt.  
+  
+  
+---  
 im branch feature/zod_dev weitermachen  
+---  
+  
 
 
 # 2025-08-09
